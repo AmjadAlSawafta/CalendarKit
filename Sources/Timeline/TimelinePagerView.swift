@@ -37,6 +37,8 @@ public final class TimelinePagerView: UIView, UIGestureRecognizerDelegate, UIScr
   }
 
   public var autoScrollToFirstEvent = false
+    
+  public var isResizeEventViewEnabled = true
 
   private var pagingViewController = UIPageViewController(transitionStyle: .scroll,
                                                   navigationOrientation: .horizontal,
@@ -226,7 +228,9 @@ public final class TimelinePagerView: UIView, UIGestureRecognizerDelegate, UIScr
       
       for handle in eventView.eventResizeHandles {
         let panGestureRecognizer = handle.panGestureRecognizer
-        panGestureRecognizer.addTarget(self, action: #selector(handleResizeHandlePanGesture(_:)))
+        if self.isResizeEventViewEnabled {
+            panGestureRecognizer.addTarget(self, action: #selector(handleResizeHandlePanGesture(_:)))
+        }        
         panGestureRecognizer.cancelsTouchesInView = true
       }
       
